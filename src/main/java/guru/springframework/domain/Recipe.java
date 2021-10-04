@@ -17,6 +17,7 @@ public class Recipe {
     private String source;
     private String url;
     private String directions;
+
     //todo add
     //private Difficulty difficulty;
     
@@ -26,11 +27,14 @@ public class Recipe {
     @Lob //Large Object Storage
     private Byte[] image;
 
+    @Enumerated(value = EnumType.STRING)
+    private Difficulty difficulty;
+    
     /**
      * Recipe is the owner of this cascade => if delete Recipe, it will persist down 
      * and delete Notes
      */
-    @OneToOne(cascade = CascadeType.ALL)  
+    @OneToOne(cascade = CascadeType.ALL)
     private Notes notes;
 
     public Long getId() {
@@ -119,5 +123,13 @@ public class Recipe {
 
     public void setIngredients(Set<Ingredient> ingredients) {
         this.ingredients = ingredients;
+    }
+
+    public Difficulty getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(Difficulty difficulty) {
+        this.difficulty = difficulty;
     }
 }
