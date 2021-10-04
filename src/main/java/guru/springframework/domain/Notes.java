@@ -2,9 +2,6 @@ package guru.springframework.domain;
 
 import javax.persistence.*;
 
-/**
- * Created by jt on 6/13/17.
- */
 @Entity
 public class Notes {
 
@@ -13,7 +10,7 @@ public class Notes {
     private Long id;
 
     @OneToOne
-    private Recipe recipe;
+    private Recipe recipe;  //No cascade, so if delete Notes, will NOT delete Recipe
 
     @Lob
     private String recipeNotes;

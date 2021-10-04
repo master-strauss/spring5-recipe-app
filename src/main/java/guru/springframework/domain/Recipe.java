@@ -2,9 +2,6 @@ package guru.springframework.domain;
 
 import javax.persistence.*;
 
-/**
- * Created by jt on 6/13/17.
- */
 @Entity
 public class Recipe {
 
@@ -22,10 +19,14 @@ public class Recipe {
     //todo add
     //private Difficulty difficulty;
 
-    @Lob
+    @Lob //Large Object Storage
     private Byte[] image;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    /**
+     * Recipe is the owner of this cascade => if delete Recipe, it will persist down 
+     * and delete Notes
+     */
+    @OneToOne(cascade = CascadeType.ALL)  
     private Notes notes;
 
     public Long getId() {
