@@ -1,4 +1,4 @@
-# Java Gradle CircleCI 2.0 configuration file
+# Java Maven CircleCI 2.0 configuration file
 # See: https://circleci.com/docs/2.0/language-java/
 version: 2
 
@@ -31,16 +31,16 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "build.gradle" }}
+            - v1-dependencies-{{ checksum "build.maven" }}
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
 
-      - run: gradle dependencies
+      - run: maven dependencies
 
       - save_cache:
           paths:
-            - ~/.gradle
-          key: v1-dependencies-{{ checksum "build.gradle" }}
+            - ~/.maven
+          key: v1-dependencies-{{ checksum "build.maven" }}
 
       # run tests!
-      - run: gradle test
+      - run: maven test
