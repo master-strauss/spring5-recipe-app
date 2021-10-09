@@ -11,31 +11,32 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.ui.Model;
 
-import java.util.Collection;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
+/**
+ * Created by jt on 6/17/17.
+ */
 public class IndexControllerTest {
 
     @Mock
     RecipeService recipeService;
-    
+
     @Mock
     Model model;
 
     IndexController controller;
-    
+
     @Before
     public void setUp() throws Exception {
-        //Mocks Repository, JPA would provide in PROD
         MockitoAnnotations.initMocks(this);
+
         controller = new IndexController(recipeService);
     }
 
@@ -49,17 +50,8 @@ public class IndexControllerTest {
     }
 
     @Test
-    public void getIndexPage() {
-        
-        String viewName = controller.getIndexPage(model);
-        assertEquals("index", viewName);
-        
-        verify(recipeService, times(1)).getRecipes();
-        verify(model, times(1)).addAttribute(eq("recipes"), anySet());
-    }
-    
-    @Test
-    public void getIndexPage2() { //2nd Test
+    public void getIndexPage() throws Exception {
+
         //given
         Set<Recipe> recipes = new HashSet<>();
         recipes.add(new Recipe());
@@ -76,6 +68,7 @@ public class IndexControllerTest {
         //when
         String viewName = controller.getIndexPage(model);
 
+
         //then
         assertEquals("index", viewName);
         verify(recipeService, times(1)).getRecipes();
@@ -83,4 +76,5 @@ public class IndexControllerTest {
         Set<Recipe> setInController = argumentCaptor.getValue();
         assertEquals(2, setInController.size());
     }
+
 }
