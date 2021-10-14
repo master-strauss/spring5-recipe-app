@@ -26,8 +26,12 @@ jobs:
       - run:
           name: Test
           command: mvn test
-            # run tests! and gen code coverage
-                   mvn integration-test cobertura:cobertura
+            
+      - run:
+          name: Integration Test
+            # run tests! and gen code coverage   
+          command: mvn integration-test cobertura:cobertura
+            
       - run:   
           name: Send to CodeCov
           command: bash <(curl -s https://codecov.io/bash)
