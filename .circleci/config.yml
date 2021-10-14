@@ -25,12 +25,8 @@ jobs:
       # Then run your tests!
       - run:
           name: Test
-          command: mvn test
-            
-      - run:
-          name: Integration Test
-            # run tests! and gen code coverage   
-          command: mvn integration-test cobertura:cobertura
+          # run tests! and gen code coverage  
+          command: mvn test cobertura:cobertura
             
       - run:   
           name: Send to CodeCov
