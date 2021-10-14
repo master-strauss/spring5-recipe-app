@@ -29,7 +29,7 @@ jobs:
           command: mvn test cobertura:cobertura
             
       - run:   
-          name: Send to CodeCov
+          name: Send to Codecov
           command: bash <(curl -s https://codecov.io/bash)
 
 # Invoke jobs via workflows
