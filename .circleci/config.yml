@@ -27,11 +27,6 @@ jobs:
           name: Test
           # run tests! and gen code coverage  
           command: mvn test cobertura:cobertura
-            
-      # run tests! and gen code coverage
-      - run: 
-          name: Test Report
-          command:  mvn clean test jacocoTestReport
         
       - run:   
           name: Send to Codecov
